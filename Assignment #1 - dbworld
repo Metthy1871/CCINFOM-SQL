@@ -1,0 +1,26 @@
+USE dbworld;
+
+SELECT * FROM Country;
+SELECT * FROM City;
+SELECT * FROM CountryLanguage;
+
+SELECT Name, GovernmentForm FROM Country
+WHERE Continent = "Asia";
+
+SELECT City.Name, City.District FROM City
+JOIN Country ON City.CountryCode = Country.Code
+WHERE Country.Name = "Thailand";
+
+SELECT Country.Name, City.Name FROM Country
+JOIN City ON City.ID = Country.Capital
+WHERE Country.Continent = "Asia";
+
+SELECT Country.Name, City.Name, City.Population FROM Country
+JOIN City ON City.ID = Country.Capital
+WHERE City.Population > 1000000;
+
+SELECT City.Name, CountryLanguage.Language AS cl FROM Country
+JOIN City ON City.CountryCode = Country.Code
+JOIN CountryLanguage ON CountryLanguage.CountryCode = Country.Code
+WHERE Country.Name = "Philippines" AND CountryLanguage.IsOfficial = 'T';
+

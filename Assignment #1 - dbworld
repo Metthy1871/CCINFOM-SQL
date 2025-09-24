@@ -4,23 +4,52 @@ SELECT * FROM Country;
 SELECT * FROM City;
 SELECT * FROM CountryLanguage;
 
+/*
+Task 1: Countries in Asia
+List all countries in Asia with their form of government.
+Report columns: country name, government form 
+*/
+
 SELECT Name, GovernmentForm FROM Country
 WHERE Continent = "Asia";
+
+/*
+Task 2: Thailand Cities and Districts
+Show all districts and cities located in Thailand.
+Report columns: city name, district
+*/
 
 SELECT City.Name, City.District FROM City
 JOIN Country ON City.CountryCode = Country.Code
 WHERE Country.Name = "Thailand";
 
+/*
+Task 3: Asian Countries and Capitals
+For each Asian country, show its capital city name.
+Report columns: country name, capital city
+*/
+
 SELECT Country.Name, City.Name FROM Country
 JOIN City ON City.ID = Country.Capital
 WHERE Country.Continent = "Asia";
+
+/*
+Task 4: Large Capital Cities
+List all countries whose capital city has at least 1,000,000 people.
+Report columns: country name, capital city, capital population
+*/
 
 SELECT Country.Name, City.Name, City.Population FROM Country
 JOIN City ON City.ID = Country.Capital
 WHERE City.Population > 1000000;
 
+/*
+Task 5: Philippines Cities and Languages
+For the country Philippines, list each city alongside the country’s official language(s).
+Report columns: city name, official language
+*/
+
 SELECT City.Name, CountryLanguage.Language AS cl FROM Country
 JOIN City ON City.CountryCode = Country.Code
 JOIN CountryLanguage ON CountryLanguage.CountryCode = Country.Code
 WHERE Country.Name = "Philippines" AND CountryLanguage.IsOfficial = 'T';
-

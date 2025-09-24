@@ -1,0 +1,37 @@
+USE employees;
+
+SELECT * FROM employees;
+SELECT * FROM salaries;
+SELECT * FROM titles;
+SELECT * FROM departments;
+SELECT * FROM dept_manager;
+SELECT * FROM dept_emp;
+
+/*
+Task 1: List all the employees, and the department currently being or previously managed and the date of assignment as 
+manager (if they manage a department). Sort the list by the date of assignment as manager (latest assignment first)
+*/
+
+SELECT CONCAT(employees.last_name, ' ', employees.first_name) AS fullName, dept_name, 
+CONCAT(dept_manager.from_date, " to ", dept_manager.to_date) AS assignmentDate FROM employees
+LEFT JOIN dept_manager ON dept_manager.emp_no = employees.emp_no
+LEFT JOIN departments ON departments.dept_no = dept_manager.dept_no
+ORDER BY dept_manager.from_date DESC;
+
+/*
+Task 2: List all the employees (employee number and complete name), and the titles they were assigned (if they were assigned titles). 
+Sort the list such that employees without titles appear first and should they have titles, sort it by employee name
+*/
+
+SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS fullName, title FROM employees e
+LEFT JOIN titles t ON t.emp_no = e.emp_no
+ORDER BY t.title IS NOT NULL, fullName ASC;
+
+/*
+Task 3: List all the departments (department name), and all the current and previous managers (employee number and date of assignment). 
+Sort the list by department name and latest assignment first
+*/
+
+SELECT d.dept_name, dm.emp_no, CONCAT(dm.from_date, " to ", dm.to_date) AS assignmentDate FROM departments d
+JOIN dept_manager dm ON dm.dept_no = d.dept_no
+ORDER BY d.dept_name ASC, dm.from_date DESC;

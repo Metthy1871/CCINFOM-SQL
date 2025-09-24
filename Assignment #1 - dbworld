@@ -49,7 +49,7 @@ For the country Philippines, list each city alongside the country’s official l
 Report columns: city name, official language
 */
 
-SELECT City.Name, CountryLanguage.Language AS cl FROM Country
+SELECT City.Name, CountryLanguage.Language FROM Country
 JOIN City ON City.CountryCode = Country.Code
 JOIN CountryLanguage ON CountryLanguage.CountryCode = Country.Code
 WHERE Country.Name = "Philippines" AND CountryLanguage.IsOfficial = 'T';

@@ -1,0 +1,43 @@
+USE dbsales;
+
+SELECT * FROM customers;
+SELECT * FROM employees;
+SELECT * FROM offices;
+SELECT * FROM orderdetails;
+SELECT * FROM orders;
+SELECT * FROM productlines;
+SELECT * FROM products;
+
+/* 
+Task 1: Generate a report showing the customers (customer number and complete name), the country 
+they are located and the complete name of the sales representative handling her/him
+*/
+
+SELECT customerNumber, customerName, customers.country, CONCAT(firstName, ' ', lastName) AS repFullName FROM customers
+JOIN employees ON salesRepEmployeeNumber = employeeNumber;
+
+/*
+Task 2: Generate the list of orders completed in May 2005 showing the order number, 
+the order and shipped date, and the complete name of the customer that made the order
+*/
+
+SELECT orderNumber, orderDate, shippedDate, customerName FROM orders
+JOIN customers ON customers.customerNumber = orders.customerNumber
+WHERE shippedDate BETWEEN "2005-05-01" AND "2005-05-31" AND status = "Shipped";
+
+/*
+Task 3: Generate the list of products below 300 pieces. Show in the list the 
+product’s code and name, and the product line the product belongs to
+*/
+
+SELECT productCode, productName, productLine FROM products
+WHERE quantityInStock < 300;
+
+/*
+Task 4: Generate the complete directory of employees, showing their complete name, email, 
+extension number, the office code they belong to as well as the office phone number.
+*/
+
+SELECT CONCAT(firstName, ' ', lastName) AS fullName, email, extension, employees.officeCode, offices.phone FROM employees
+JOIN offices ON employees.officeCode = offices.officeCode;
+

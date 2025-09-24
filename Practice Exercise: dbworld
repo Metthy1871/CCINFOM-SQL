@@ -1,0 +1,21 @@
+USE dbworld;
+
+-- SELECT * FROM city;
+-- SELECT * FROM country;
+-- SELECT * FROM countrylanguage;
+
+-- Task 1: Generate the list of countries (country name and continent) that uses English as the official language.
+SELECT Name, Continent FROM country
+JOIN countrylanguage ON CountryCode = Code
+WHERE Language = "English" AND IsOfficial = 'T';
+
+-- Task 2: Generate the list of official languages used by countries in Africa
+SELECT DISTINCT Language FROM country
+JOIN countrylanguage ON CountryCode = Code
+WHERE Continent = "Africa";
+
+-- Task 3: Generate the list of cities (city name and country name) in North America with a population of more than 1 million
+SELECT City.Name, Country.Name FROM Country
+JOIN City ON City.CountryCode = Code
+WHERE Continent = "North America" AND City.Population > 1000000;
+

@@ -32,6 +32,6 @@ Task 3: List all the departments (department name), and all the current and prev
 Sort the list by department name and latest assignment first
 */
 
-SELECT d.dept_name, dm.emp_no, CONCAT(dm.from_date, " to ", dm.to_date) AS assignmentDate FROM departments d
+SELECT d.dept_name, dm.emp_no, dm.from_date AS assignmentDate FROM departments d
 JOIN dept_manager dm ON dm.dept_no = d.dept_no
 ORDER BY d.dept_name ASC, dm.from_date DESC;

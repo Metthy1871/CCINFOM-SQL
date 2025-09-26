@@ -15,7 +15,7 @@ JOIN countrylanguage ON CountryCode = Code
 WHERE Continent = "Africa" AND isOfficial = 'T';
 
 -- Task 3: Generate the list of cities (city name and country name) in North America with a population of more than 1 million
-SELECT City.Name, Country.Name FROM Country
-JOIN City ON City.CountryCode = Code
-WHERE Continent = "North America" AND City.Population > 1000000;
+SELECT c.Name, co.Name FROM country co
+JOIN city c ON c.CountryCode = Code
+WHERE Continent = "North America" AND c.Population > 1000000;
 

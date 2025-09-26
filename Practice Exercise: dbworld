@@ -12,7 +12,7 @@ WHERE Language = "English" AND IsOfficial = 'T';
 -- Task 2: Generate the list of official languages used by countries in Africa
 SELECT DISTINCT Language FROM country
 JOIN countrylanguage ON CountryCode = Code
-WHERE Continent = "Africa";
+WHERE Continent = "Africa" AND isOfficial = 'T';
 
 -- Task 3: Generate the list of cities (city name and country name) in North America with a population of more than 1 million
 SELECT City.Name, Country.Name FROM Country

@@ -12,11 +12,11 @@ Task 1: List all the employees, and the department currently being or previously
 manager (if they manage a department). Sort the list by the date of assignment as manager (latest assignment first)
 */
 
-SELECT CONCAT(employees.last_name, ' ', employees.first_name) AS fullName, dept_name, 
-CONCAT(dept_manager.from_date, " to ", dept_manager.to_date) AS assignmentDate FROM employees
-LEFT JOIN dept_manager ON dept_manager.emp_no = employees.emp_no
-LEFT JOIN departments ON departments.dept_no = dept_manager.dept_no
-ORDER BY dept_manager.from_date DESC;
+SELECT e.emp_no, CONCAT(e.first_name, ' ', e.last_name) AS fullName, d.dept_name, 
+dm.from_date AS assignmentDate FROM employees e
+LEFT JOIN dept_manager dm ON dm.emp_no = e.emp_no
+LEFT JOIN departments d ON d.dept_no = dm.dept_no
+ORDER BY dm.from_date DESC;
 
 /*
 Task 2: List all the employees (employee number and complete name), and the titles they were assigned (if they were assigned titles). 

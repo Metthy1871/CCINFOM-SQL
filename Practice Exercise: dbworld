@@ -1,8 +1,8 @@
 USE dbworld;
 
--- SELECT * FROM city;
--- SELECT * FROM country;
--- SELECT * FROM countrylanguage;
+SELECT * FROM city;
+SELECT * FROM country;
+SELECT * FROM countrylanguage;
 
 -- Task 1: Generate the list of countries (country name and continent) that uses English as the official language.
 SELECT Name, Continent FROM country

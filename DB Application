@@ -1,0 +1,43 @@
+CREATE SCHEMA IF NOT EXISTS draft;
+
+USE draft;
+
+CREATE TABLE IF NOT EXISTS Restaurants (
+	RestaurantID INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (RestaurantID)
+);
+
+CREATE TABLE IF NOT EXISTS Staff(
+	EmployeeID INT NOT NULL AUTO_INCREMENT,
+    RestaurantID INT NOT NULL, -- foreign key to restaurant
+    Name VARCHAR(100) NOT NULL,
+    JobPosition VARCHAR(50) NOT NULL,
+    AuthorizeWasteAreas TEXT, 
+    ShiftAssignment VARCHAR(50) NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (EmployeeID),
+    FOREIGN KEY (RestaurantID) 
+		REFERENCES Restaurants(RestaurantID) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE    
+);
+
+
+CREATE TABLE IF NOT EXISTS Menu_Items(
+	ItemID INT AUTO_INCREMENT PRIMARY KEY,
+    RestaurantID INT NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Category VARCHAR(50),
+    Price DECIMAL(10,2),
+    Stock INT DEFAULT 0,
+    Status VARCHAR(50) DEFAULT 'Active',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+                 ON UPDATE CURRENT_TIMESTAMP,
+	FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
+);
+
+SHOW TABLES;
+SELECT * FROM Restaurants;
+SELECT * FROM Menu_Items;
+SELECT * FROM Staff;

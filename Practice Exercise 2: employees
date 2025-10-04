@@ -1,0 +1,40 @@
+USE employees;
+
+SELECT * FROM employees;
+SELECT * FROM salaries;
+SELECT * FROM titles;
+SELECT * FROM departments;
+SELECT * FROM dept_manager;
+SELECT * FROM dept_emp;
+
+/*
+Task 1: Generate a list of employees (complete name) that became a manager more than once. 
+Include the number of times the employee became a manager in the result.
+*/
+
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS fullName, COUNT(e.emp_no) AS timesManager 
+FROM dept_manager dm
+JOIN employees e ON e.emp_no = dm.emp_no
+GROUP BY e.emp_no, fullName
+HAVING timesManager > 1;
+
+/*
+Task 2: Generate the list of departments (department name) that had more than two managers.
+Include the number of managers the department had in the result.
+*/
+
+SELECT d.dept_name, COUNT(dm.dept_no) AS numberOfManagers
+FROM dept_manager dm
+JOIN departments d ON d.dept_no = dm.dept_no
+GROUP BY d.dept_no, d.dept_name
+HAVING numberOfManagers > 2;
+
+/*
+Task 3: Generate the list of current department managers (complete name) that have been managing the
+department for more than 10,000 days.
+*/
+
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS fullName
+FROM dept_manager dm
+JOIN employees e ON e.emp_no = dm.emp_no
+WHERE DATEDIFF(CURDATE(), dm.from_date) > 10000 AND dm.to_date = '9999-01-01';
